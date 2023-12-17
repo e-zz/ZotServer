@@ -1,6 +1,6 @@
 {
     "name": "zotserver",
-    "version": "0.1.2",
+    "version": "lsq-pdf-ext-0.0.1",
     "description": "Zotero Local Server for third-party integrations",
     "private": true,
     "repository": "https://github.com/MunGell/ZotServer",
@@ -9,6 +9,7 @@
     "scripts": {
         "build": "esbuild src/main.ts --bundle --outfile=chrome/content/zotserver/main.js",
         "watch": "esbuild src/main.ts --bundle --outfile=chrome/content/zotserver/main.js --watch",
+        "pub": "7z a -tzip package.zip install.rdf chrome.manifest chrome/",
         "lint": "tsc -noEmit && eslint src",
         "test": "npm run lint"
     },
