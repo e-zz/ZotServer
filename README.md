@@ -14,7 +14,7 @@ I am working on a [connector](https://github.com/MunGell/obsidian-zotero) that w
 
 ## Installation
 
-1. Download lastest stable version of the addon from [GitHub release page of this repository](https://github.com/MunGell/ZotServer/releases/)
+1. Download lastest stable version of the addon from [GitHub release page of this repository](https://github.com/e-zz/ZotServer/releases/)
 2. Use "Install addon from file" menu link in Zotero and select the downloaded `.xpi` file
 
 > How to find "Install addon from file" option:
