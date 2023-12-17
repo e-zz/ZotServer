@@ -8,43 +8,43 @@ export default class Selected implements EndpointInterface {
     supportedDataTypes = ['application/json'];
     permitBookmarklet = false;
 
-    public async init(request: any) {
+    public async init() {
         // @todo: validate request data
-        const items = await this.getSelected(request.data);
+        const items = await this.getSelected();
 
         // @todo: improve response handing
         return [200, 'application/json', JSON.stringify(items)];
     }
 
-    private getSelected(conditions: any[]) {
+    private getSelected() {
 
         // Get the Zotero Pane to interact with the Zotero UI
-        var ZoteroPane = Zotero.getActiveZoteroPane();
+        const ZoteroPane = Zotero.getActiveZoteroPane();
 
         // Then grab the currently selected items from the Zotero pane:
-        var selectedItems = ZoteroPane.getSelectedItems();
+        const selectedItems = ZoteroPane.getSelectedItems();
 
         // Map each selected item to a new object that includes the attachment paths
-        var itemsWithAttachments = selectedItems.map(item => {
+        const itemsWithAttachments = selectedItems.map((item: any) => {
             // Skip notes
             if (item.isNote()) {
                 return null;
             }
 
             // Get attachment paths
-            var attachmentPaths = [];
+            let attachmentPaths = [];
             if (item.isRegularItem()) {
-                let attachmentIDs = item.getAttachments();
-                let attachmentObjects = attachmentIDs.map(id => {
-                    let attachment = Zotero.Items.get(id);
+                const attachmentIDs = item.getAttachments();
+                const attachmentObjects = attachmentIDs.map((id: any) => {
+                    const attachment = Zotero.Items.get(id);
                     return attachment ? { [id]: attachment.attachmentPath } : null;
-                }).filter(path => path !== null); // Remove any null paths
+                }).filter((path: any) => path !== null); // Remove any null paths
                 attachmentPaths = Object.assign({}, ...attachmentObjects);
             }
 
             return { item, attachmentPaths };
 
-        }).filter(item => item !== null); // Remove any null items
+        }).filter((item: { item: any, attachmentPaths: any[] }) => item !== null); // Remove any null items
 
         console.log("Items with attachments: ", itemsWithAttachments);
 
