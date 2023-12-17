@@ -1,3 +1,9 @@
+# Modification
+To interact with Logseq, for now I added `src/endpoints/Selected.ts`. By implementing the endpoints needed, one can possibly enable features like two-way notes syncing, PDF search and import, citation management and so on.
+
+Credits to [cboulanger/excite-docker](https://github.com/cboulanger/excite-docker) for useful examples.
+
+Original readme:
 # ZotServer for Zotero
 
 ZotServer provides locally accessible HTTP API.
