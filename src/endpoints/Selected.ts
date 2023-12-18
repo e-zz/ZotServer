@@ -37,7 +37,7 @@ export default class Selected implements EndpointInterface {
                 const attachmentIDs = item.getAttachments();
                 const attachmentObjects = attachmentIDs.map((id: any) => {
                     const attachment = Zotero.Items.get(id);
-                    return attachment ? { [id]: attachment.attachmentPath } : null;
+                    return attachment ? { [attachment.key]: attachment.attachmentPath } : null;
                 }).filter((path: any) => path !== null); // Remove any null paths
                 attachmentPaths = Object.assign({}, ...attachmentObjects);
             }
