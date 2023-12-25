@@ -1,6 +1,7 @@
 
 import EndpointInterface from '../types/EndpointInterface';
 
+
 // @todo: consider auth login through abstract class
 export default class Selected implements EndpointInterface {
     // @todo: move those into either decorators or interface
@@ -22,7 +23,7 @@ export default class Selected implements EndpointInterface {
         const ZoteroPane = Zotero.getActiveZoteroPane();
 
         // Then grab the currently selected items from the Zotero pane:
-        const selectedItems = ZoteroPane.getSelectedItems();
+        let selectedItems = ZoteroPane.getSelectedItems();
 
         // Map each selected item to a new object that includes the attachment paths
         const itemsWithAttachments = selectedItems.map((item: any) => {
@@ -32,19 +33,18 @@ export default class Selected implements EndpointInterface {
             }
 
             // Get attachment paths
-            let attachmentPaths = [];
+            let attachments = [];
             if (item.isRegularItem()) {
                 const attachmentIDs = item.getAttachments();
-                const attachmentObjects = attachmentIDs.map((id: any) => {
+                attachments = attachmentIDs.map((id: any) => {
                     const attachment = Zotero.Items.get(id);
-                    return attachment ? { [attachment.key]: attachment.attachmentPath } : null;
+                    return attachment
                 }).filter((path: any) => path !== null); // Remove any null paths
-                attachmentPaths = Object.assign({}, ...attachmentObjects);
             }
 
-            return { item, attachmentPaths };
+            return { item, attachments };
 
-        }).filter((item: { item: any, attachmentPaths: any[] }) => item !== null); // Remove any null items
+        }).filter((item: { item: any, attachments: any[] }) => item !== null); // Remove any null items
 
         console.log("Items with attachments: ", itemsWithAttachments);
 
