@@ -1,6 +1,6 @@
 {
     "name": "zotserver",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Zotero Local Server for third-party integrations",
     "private": true,
     "repository": "https://github.com/MunGell/ZotServer",
