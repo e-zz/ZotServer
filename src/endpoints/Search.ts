@@ -21,9 +21,15 @@ export default class Search implements EndpointInterface {
 
         // @todo: make all "everything" queries be "contains"
         // @todo: docs on possible conditions and operators wouldn't hurt here
-        conditions.forEach(({ condition, operator = 'contains', value, required = true}) => {
-            s.addCondition(condition, operator, value, required)
-        });
+        // REFACTOR: simplify this for Union Types
+        if (Array.isArray(conditions)) {
+            conditions.forEach(({ condition, operator = 'contains', value, required = true }) => {
+                s.addCondition(condition, operator, value, required)
+            });
+        } else {
+            let { condition, operator = 'contains', value, required = true } = conditions;
+            s.addCondition(condition, operator, value, required);
+        }
 
         return s.search();
     }
