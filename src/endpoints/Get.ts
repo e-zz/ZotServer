@@ -43,6 +43,9 @@ export default class Get implements EndpointInterface {
                     return null;
                 }
 
+                // Get BBT citation key
+                let citationKey = item.getField('citationKey');
+
                 // Get attachment paths
                 let attachments = [];
                 if (item.isRegularItem()) {
@@ -53,9 +56,9 @@ export default class Get implements EndpointInterface {
                     }).filter((path: any) => path !== null); // Remove any null paths
                 }
 
-                return { item, attachments };
+                return { item, citationKey, attachments };
 
-            }).filter((item: { item: any, attachments: any[] }) => item !== null); // Remove any null items
+            }).filter((item: { item: any, citationKey: string | undefined, attachments: any[] }) => item !== null); // Remove any null items
 
             console.log("Items with attachments: ", itemsWithAttachments);
 
