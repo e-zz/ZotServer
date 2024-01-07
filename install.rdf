@@ -5,14 +5,14 @@
     <Description about="urn:mozilla:install-manifest">
         <em:id>zotserver@gazanchyan.com</em:id>
         <em:name>ZotServer</em:name>
-        <em:version>1.0.3</em:version>
+        <em:version>1.0.4</em:version>
         <em:type>2</em:type> <!-- type=extension -->
         <em:multiprocessCompatible>true</em:multiprocessCompatible>
         <em:description>Zotero Local Server for third-party integrations</em:description>
-        <em:creator>Shmavon Gazanchyan</em:creator>
-        <em:homepageURL>http://github.com/MunGell/ZotServer</em:homepageURL>
+        <em:creator>Shmavon Gazanchyan; e-zz</em:creator>
+        <em:homepageURL>https://github.com/e-zz/ZotServer</em:homepageURL>
         <!-- <em:optionsURL>chrome://zotfile/content/options.xul</em:optionsURL> -->
-        <em:updateURL>https://raw.githubusercontent.com/mungell/ZotServer/master/update.rdf</em:updateURL>
+        <em:updateURL>https://raw.githubusercontent.com/e-zz/ZotServer/master/update.rdf</em:updateURL>
 
         <!-- Requires Zotero -->
         <em:requires>
