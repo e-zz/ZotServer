@@ -11,7 +11,8 @@
         "watch": "esbuild src/main.ts --bundle --outfile=chrome/content/zotserver/main.js --watch",
         "pub": "7z a -tzip package.zip install.rdf chrome.manifest chrome/",
         "lint": "tsc -noEmit && eslint src",
-        "test": "npm run lint"
+        "test": "npm run lint",
+        "release": "npm run build && npm run pub"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^5.10.2",
