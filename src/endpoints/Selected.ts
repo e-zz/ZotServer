@@ -23,31 +23,33 @@ export default class Selected implements EndpointInterface {
         const ZoteroPane = Zotero.getActiveZoteroPane();
 
         // Then grab the currently selected items from the Zotero pane:
-        let selectedItems = ZoteroPane.getSelectedItems();
+        const selectedItems = ZoteroPane.getSelectedItems();
 
         // Map each selected item to a new object that includes the attachment paths
-        const itemsWithAttachments = selectedItems.map((item: any) => {
+        const itemsWithAttachments = selectedItems.reduce((acc: any[], item: any) => {
             // Skip notes
             if (item.isNote()) {
-                return null;
+                return acc;
             }
 
             // Get BBT citation key
-            let citationKey = item.getField('citationKey');
+            const citationKey = item.getField('citationKey');
+
+            // Get baseName
+            const baseName = Zotero.Attachments.getFileBaseNameFromItem(item);
 
             // Get attachment paths
             let attachments = [];
             if (item.isRegularItem()) {
                 const attachmentIDs = item.getAttachments();
-                attachments = attachmentIDs.map((id: any) => {
-                    const attachment = Zotero.Items.get(id);
-                    return attachment
-                }).filter((path: any) => path !== null); // Remove any null paths
+                attachments = attachmentIDs.map((id: any) => Zotero.Items.get(id)).filter(Boolean);
             }
 
-            return { item, citationKey, attachments };
+            // Add item to accumulator
+            acc.push({ item, citationKey, attachments, aux: { baseName } });
 
-        }).filter((item: { item: any, citationKey: string | undefined, attachments: any[] }) => item !== null); // Remove any null items
+            return acc;
+        }, []);
 
         console.log("Items with attachments: ", itemsWithAttachments);
 
